@@ -2,6 +2,172 @@
 
 {% block content %}
 
-<h1>Hello Django</h1>
+<h1>Present Weather Forecast</h1>
+
+{% if api %}
+	{% if api == "Error Occured" %}
+		There was an Error. Please try again later.
+	{% else %}
+
+<div class="jumbotron">
+  <h1 class="display-5">Air Quality Index in {{ api.location.name}}</h1>
+
+  		{% if aqi == 1 %}
+  		<h3>Range from 0 to 50</h3>
+  		{% elif aqi == 2 %}
+  		<h3>Range from 51 to 100</h3>
+  		{% elif aqi == 3 %}
+  		<h3>Range from 101 to 150</h3>
+  		{% elif aqi == 4 %}
+  		<h3>Range from 151 to 200</h3>
+  		{% elif aqi == 5 %}
+  		<h3>Range from 201 to 300</h3>
+  		{% else %}
+  		<h3>Range from 301 and higher</h3>
+  		{% endif %}
+
+  		<br>
+  		<br>
+
+  	<h3>The Hazardous gases and their quantity that are present in the air right now in {{api.location.name}} is :</h3>
+
+  	<br>
+
+
+  		<table width="80%" align="center">
+  			<tr style="padding: 15px;">
+  				<th>Hazardous Gas</th>
+  				<th>Quantity in air</th>
+  			</tr>
+  			<tr>
+  				<td>Carbon Monoxide (<span>CO</span>)</td>
+  				<td>{{api.current.air_quality.co}}</td>
+  			</tr>
+  			<tr>
+  				<td>Nitrogen Dioxide (<span>NO<sub>2</sub></span>)</td>
+  				<td>{{api.current.air_quality.no2}}</td>
+  			</tr>
+  			<tr>
+  				<td>Ozone (<span>O<sub>3</sub></span>)</td>
+  				<td>{{api.current.air_quality.o3}}</td>
+  			</tr>
+  			<tr>
+  				<td>Sulfur Dioxide (<span>SO<sub>2</sub></span>)</td>
+  				<td>{{api.current.air_quality.so2}}</td>
+  			</tr>
+  			<tr>
+  				<td>Air Pollutants (<span>PM 2.5</span>)</td>
+  				<td>{{api.current.air_quality.pm2_5}}</td>
+  			</tr>
+  			<tr>
+  				<td>Pollutants that reacts with air (<span>PM 10</span>)</td>
+  				<td>{{api.current.air_quality.pm10}}</td>
+  			</tr>
+  		</table>
+
+	<hr class="my-4">
+  <h2 class="lead">Now we are going to take a look at the weather forecast in {{api.location.name}}</h2>
+  <br>
+  <p style="width: 80%;" align="center">Temperature in Celecius</p>
+  <table width="80%" align="center">
+  	<tr style="padding: 15px;">
+  		<th>Minimum temperature</th>
+  		<th>Maximum temperature</th>
+
+  	</tr>
+  	<tr>
+  		<td>{{temperature.mintemp_c}}</td>
+  		<td>{{temperature.maxtemp_c}}</td>
+
+  	</tr>
+  </table>
+  <br>
+   <table width="80%" align="center">
+  	<tr style="padding: 15px;">
+  		<th>Average temperature</th>
+  		<th>Temperature feels like</th>
+
+  	</tr>
+  	<tr>
+  		<td>{{temperature.avgtemp_c}}</td>
+  		<td>{{api.current.feelslike_c}}</td>
+
+  	</tr>
+  </table>
+  <br>
+  <br>
+  <p style="width: 80%;" align="center">Temperature in Fahrenheit</p>
+  <table width="80%" align="center">
+  	<tr style="padding: 15px;">
+  		<th>Minimum temperature</th>
+  		<th>Maximum temperature</th>
+
+  	</tr>
+  	<tr>
+  		<td>{{temperature.mintemp_f}}</td>
+  		<td>{{temperature.maxtemp_f}}</td>
+
+  	</tr>
+  </table>
+  <br>
+   <table width="80%" align="center">
+  	<tr style="padding: 15px;">
+  		<th>Average temperature</th>
+  		<th>Temperature feels like</th>
+
+  	</tr>
+  	<tr>
+  		<td>{{temperature.avgtemp_f}}</td>
+  		<td>{{api.current.feelslike_f}}</td>
+
+  	</tr>
+  </table>
+  <hr class="my-4">
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more about AQI</a>
+  </p>
+</div>
+
+
+  		
+
+  		
+minimum: {{temperature.mintemp_c}}
+
+	Area: {{ api.location.name}} </br>
+
+	Temperature in Celecius: {{ api.current.temp_c}} </br>
+
+	Temperature in Farenheit: {{ api.current.temp_f}} </br>
+
+	Climate: <span>{{ api.current.condition.text}}</span> <img src={{ api.current.condition.icon }} /> </br>
+
+	Wind speed in kilometer: {{ api.current.wind_kph }} </br>
+
+	Sudden Strong wind (<span>Gust</span>) in Kilometer: {{api.current.gust_kph}} </br>
+
+	Humidity: {{api.current.humidity}} </br>
+
+	Temperature Now Feels like in Celecius: {{api.current.feelslike_c}} </br>
+
+	Present Ultra Violet rays: {{api.current.uv}} </br>
+
+	<ul >Present air quality in {{api.location.name}}
+		
+	</ul>
+
+	Air Quality index (<span>AQI</span>): {{ aqi }} </br>
+
+	<ul > Astrology in {{ api.location.name}}
+		<li>Sun rise: {{ astro.sunrise }}</li>
+		<li>Sun set: {{ astro.sunset }}</li>
+		<li>Moon Phase: {{ astro.moon_phase }}</li>
+		<li>Moon Illumination: {{ astro.moon_illumination }}</li>
+	</ul>
+
+	{% endif %}
+
+{% endif %}
+
 
 {% endblock %}
