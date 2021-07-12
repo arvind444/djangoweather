@@ -2,6 +2,37 @@
 
 {% block content %}
 
-<h1>About AQI</h1>
+<h1>About Air Quality Index</h1>
+
+<div class="jumbotron">
+  <div class="container">
+    <button style="color: green; border: none; align-items: center;" disabled><h1 class="display-5">GOOD</h1></button>
+    <p class="lead">If the air quality index (AQI) ranges from 0 to 50 is said to be good.</p>
+    <p class="lead">Air quality is satisfactory, and air pollution poses little or no risk.</p>
+  </div>
+   <div class="container">
+    <button style="color: yellowgreen; border: none; align-items: center;" disabled><h1 class="display-5">MODERATE</h1></button>
+    <p class="lead">If the air quality index (AQI) ranges from 51 to 100 is said to be moderate.</p>
+    <p class="lead">Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.</p>
+  </div>
+   <div class="container">
+    <button style="color: orange; border: none; align-items: center;" disabled><h1 class="display-5">UNHEALTHY for SENSITIVE GROUPS</h1></button>
+    <p class="lead">If the air quality index (AQI) ranges from 101 to 150 is said to be unhealthy for sensitive group of people.</p>
+    <p class="lead">Members of sensitive groups may experience health effects. The general public is less likely to be affected.</p>
+  </div>
+  <button style="color: red; border: none; align-items: center;" disabled><h1 class="display-5">UNHEALTHY</h1></button>
+    <p class="lead">If the air quality index (AQI) ranges from 151 to 200 is said to be unhealthy.</p>
+    <p class="lead">Some members of the general public may experience health effects, members of sensitive groups may experience more serious health effects.</p>
+  <div>
+  <button style="color: purple; border: none; align-items: center;" disabled><h1 class="display-5">VERY UNHEALTHY</h1></button>
+    <p class="lead">If the air quality index (AQI) ranges from 201 to 300 is said to be very unhealthy.</p>
+    <p class="lead">Health alert: The risk of health effects is increased for everyone.</p>
+  </div>
+  <div>
+  <button style="color: maroon; border: none; align-items: center;" disabled><h1 class="display-5">HAZARDOUS</h1></button>
+    <p class="lead">If the air quality index (AQI) ranges from 301 and higher is said to be hazardous.</p>
+    <p class="lead">Health warning of emergency conditions: everyone is more likely to be affected.</p>
+  </div>
+</div>
 
 {% endblock %}

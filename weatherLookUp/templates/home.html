@@ -3,27 +3,27 @@
 {% block content %}
 
 <h1>Present Weather Forecast</h1>
+<br>
 
 {% if api %}
 	{% if api == "Error Occured" %}
 		There was an Error. Please try again later.
 	{% else %}
-
 <div class="jumbotron">
   <h1 class="display-5">Air Quality Index in {{ api.location.name}}</h1>
 
   		{% if aqi == 1 %}
-  		<h3>Range from 0 to 50</h3>
+  		<h3>Range from 0 to 50 which is Good.</h3>
   		{% elif aqi == 2 %}
-  		<h3>Range from 51 to 100</h3>
+  		<h3>Range from 51 to 100 which is Moderate.</h3>
   		{% elif aqi == 3 %}
-  		<h3>Range from 101 to 150</h3>
+  		<h3>Range from 101 to 150 which is Unhealthy for Sensitive Groups.</h3>
   		{% elif aqi == 4 %}
-  		<h3>Range from 151 to 200</h3>
+  		<h3>Range from 151 to 200 which is Unhealthy</h3>
   		{% elif aqi == 5 %}
-  		<h3>Range from 201 to 300</h3>
+  		<h3>Range from 201 to 300 which is Very Unhealthy</h3>
   		{% else %}
-  		<h3>Range from 301 and higher</h3>
+  		<h3>Range from 301 and higher which is Hazardous</h3>
   		{% endif %}
 
   		<br>
@@ -48,7 +48,7 @@
   				<td>{{api.current.air_quality.no2}}</td>
   			</tr>
   			<tr>
-  				<td>Ozone (<span>O<sub>3</sub></span>)</td>
+  				<td>Ground level Ozone (<span>O<sub>3</sub></span>)</td>
   				<td>{{api.current.air_quality.o3}}</td>
   			</tr>
   			<tr>
@@ -56,19 +56,21 @@
   				<td>{{api.current.air_quality.so2}}</td>
   			</tr>
   			<tr>
-  				<td>Air Pollutants (<span>PM 2.5</span>)</td>
+  				<td>Particle Pollution (<span>PM 2.5</span>)</td>
   				<td>{{api.current.air_quality.pm2_5}}</td>
   			</tr>
   			<tr>
-  				<td>Pollutants that reacts with air (<span>PM 10</span>)</td>
+  				<td>Particulate Matter (<span>PM 10</span>)</td>
   				<td>{{api.current.air_quality.pm10}}</td>
   			</tr>
   		</table>
 
 	<hr class="my-4">
-  <h2 class="lead">Now we are going to take a look at the weather forecast in {{api.location.name}}</h2>
+  <h2 class="display-5">Now we are going to take a look at the weather forecast in {{api.location.name}}</h2>
   <br>
-  <p style="width: 80%;" align="center">Temperature in Celecius</p>
+  <h2 align="center">Weather Condition: <span>{{ api.current.condition.text}}</span> <img src={{ api.current.condition.icon }} /> </br></h2>
+  <h2 style="width: 80%;" align="center">Humidity: <span>{{api.current.humidity}}</span></h2>
+  <p style="width: 80%;" align="center">Temperature in Celsius</p>
   <table width="80%" align="center">
   	<tr style="padding: 15px;">
   		<th>Minimum temperature</th>
@@ -122,6 +124,7 @@
 
   	</tr>
   </table>
+
   <hr class="my-4">
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more about AQI</a>
@@ -129,41 +132,73 @@
 </div>
 
 
-  		
 
-  		
-minimum: {{temperature.mintemp_c}}
+<div class="jumbotron">
+	<h2 class="display-5">Astrology in {{api.location.name}}</h2>
+</br>
+<br>
+	 <table width="80%" align="center">
+  	<tr style="padding: 15px; text-align: left;">
+  		<th>Sun Rise</th>
+  		<th>Sun Set</th>
+  		<th>Ultra Violet</th>
 
-	Area: {{ api.location.name}} </br>
+  	</tr>
+  	<tr>
+  		<td>{{astro.sunrise}}</td>
+  		<td>{{astro.sunset}}</td>
+  		<td>{{api.current.uv}}</td>
 
-	Temperature in Celecius: {{ api.current.temp_c}} </br>
+  	</tr>
+  </table>
+  <br>
+  	 <table width="80%" align="center">
+  	<tr style="padding: 15px; text-align: left;">
+  		<th>Moon Rise</th>
+  		<th>Moon Set</th>
+  		<th>Moon Phase</th>
 
-	Temperature in Farenheit: {{ api.current.temp_f}} </br>
+  	</tr>
+  	<tr>
+  		<td>{{astro.moonset}}</td>
+  		<td>{{astro.moonrise}}</td>
+  		<td>{{astro.moon_phase}}</td>
 
-	Climate: <span>{{ api.current.condition.text}}</span> <img src={{ api.current.condition.icon }} /> </br>
+  	</tr>
+  </table>
+  <br>
 
-	Wind speed in kilometer: {{ api.current.wind_kph }} </br>
+  <hr class="my-4">
 
-	Sudden Strong wind (<span>Gust</span>) in Kilometer: {{api.current.gust_kph}} </br>
+  <h2 class="display-5">Wind Speed and Direction in {{api.location.name}}</h2>
+</br>
+	</br>
+	 <table width="80%" align="center">
+  	<tr style="padding: 15px;">
+  		<th>Wind Speed</th>
+  		<th>Gust speed</th>
+  	</tr>
+  	<tr>
+  		<td>{{api.current.wind_kph}} KM</td>
+  		<td>{{api.current.gust_kph}} KM</td>
+  	</tr>
+  </table>
+  <br>
+  <br>
 
-	Humidity: {{api.current.humidity}} </br>
+   <table width="80%" align="center">
+  	<tr style="padding: 15px;">
+  		<th>Wind Direction</th>
+  		<th>Wind Degree</th>
+  	</tr>
+  	<tr>
+  		<td>{{api.current.wind_dir}}</td>
+  		<td>{{api.current.wind_degree}}</td>
+  	</tr>
+  </table>
+  <br>
 
-	Temperature Now Feels like in Celecius: {{api.current.feelslike_c}} </br>
-
-	Present Ultra Violet rays: {{api.current.uv}} </br>
-
-	<ul >Present air quality in {{api.location.name}}
-		
-	</ul>
-
-	Air Quality index (<span>AQI</span>): {{ aqi }} </br>
-
-	<ul > Astrology in {{ api.location.name}}
-		<li>Sun rise: {{ astro.sunrise }}</li>
-		<li>Sun set: {{ astro.sunset }}</li>
-		<li>Moon Phase: {{ astro.moon_phase }}</li>
-		<li>Moon Illumination: {{ astro.moon_illumination }}</li>
-	</ul>
+</div>
 
 	{% endif %}
 
